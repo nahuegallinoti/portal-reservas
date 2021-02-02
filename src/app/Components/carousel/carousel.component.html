@@ -1,0 +1,33 @@
+<ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="3000" [keyboard]="true"
+  [pauseOnHover]="true" [wrap]="true" [activeId]="'firstSlide'">
+  <ng-template ngbSlide id="firstSlide">
+    <div>
+      <img class="d-block w-100" src="assets/cabana1.jpg" alt="Imagen 1">
+    </div>
+    <div class="carousel-caption">
+      <h1>Disfruta de la tranquilidad de nuestro complejo</h1>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide id="secondSlide">
+    <div>
+      <img class="d-block w-100" src="assets/cabana2.jpg" alt="Imagen 2">
+    </div>
+    <div class="carousel-caption">
+      <h1>Ubicado en la mejor zona de las sierras chicas</h1>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide id="thirstSlide">
+    <div class="picsum-img-wrapper">
+      <img class="d-block w-100" src="assets/cabana3.jpg" alt="Imagen 3">
+    </div>
+  </ng-template>
+  <ng-template ngbSlide id="forthSlide">
+    <div class="picsum-img-wrapper">
+      <img class="d-block w-100" src="assets/cabana4.jpg" alt="Imagen 4">
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="div-boton-formulario">
+  <button class="btn-formulario" mat-raised-button (click)="openDialogEnviarDatos()">¡Registrá los datos de tu reserva!</button>
+</div>

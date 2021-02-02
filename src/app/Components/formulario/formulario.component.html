@@ -1,0 +1,57 @@
+
+    <div class="mat-dialog-container">
+  <form [formGroup]="datosPersonalesForm" fxFlex fxLayout="column" class="fullWidth">
+    <div>
+      <mat-toolbar color="primary">Registrar Datos</mat-toolbar>
+    </div>
+    <div fxFlex fxLayoutGap="10px" class="formulario">
+
+      <mat-form-field class="item">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" placeholder="Juan" formControlName="nombre" required>
+      </mat-form-field>
+
+      <mat-form-field class="item">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" placeholder="López Romero" formControlName="apellidos" required>
+      </mat-form-field>
+
+      <mat-form-field class="item">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="number" placeholder="3516432432" formControlName="telefono" required>
+      </mat-form-field>
+
+      <mat-form-field class="item">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="juan@example.com" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="item">
+        <mat-label>Fecha Desde</mat-label>
+        <input matInput type="date" formControlName="fechaDesde" required>
+      </mat-form-field>
+
+      <mat-form-field class="item">
+        <mat-label>Fecha Hasta</mat-label>
+        <input matInput type="date" formControlName="fechaHasta" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cantidad Ocupantes</mat-label>
+        <input matInput type="number" formControlName="cantidadPersonas" required>
+      </mat-form-field>
+
+    </div>
+
+    <div class="buttons">
+    <button class="btnCancelarRegistro" mat-raised-button mat-primary color="accent" (click)="cancelarRegistro()">Cancelar
+
+    </button>  
+
+    <button class="btnGuardarRegistro" mat-raised-button mat-primary color="primary" (click)="guardarRegistro()">Enviar
+  
+    </button>
+    
+  </div>
+  </form>
+</div>
