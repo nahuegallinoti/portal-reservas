@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/portal-clientes",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

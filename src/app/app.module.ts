@@ -14,12 +14,14 @@ import { UIService } from './Shared/ui.service';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MenuComponent } from './Components/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
-    FormularioComponent
+    FormularioComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
