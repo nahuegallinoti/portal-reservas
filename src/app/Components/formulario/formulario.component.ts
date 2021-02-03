@@ -66,7 +66,7 @@ export class FormularioComponent implements OnInit {
     solicitudReserva.fechaDesde = this.datosPersonalesForm.value.fechaDesde;
     solicitudReserva.fechaHasta = this.datosPersonalesForm.value.fechaHasta;
     
-    solicitudReserva.estado = this.estados.find(e => e.descripcion.toLowerCase() == "pendiente aprobacion");
+    solicitudReserva.estado = this.estados.find(e => e.descripcion.toLowerCase() == "pendiente de aprobacion");
 
     this._solicitudReserva.guardarSolicitudReserva(solicitudReserva);
     this.dialogRef.close();

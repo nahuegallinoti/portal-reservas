@@ -25,6 +25,7 @@ export class SolicitudReservaService {
       {},
       solicitud.cliente
     );
+
     const solicitudParse = Object.assign({}, solicitud);
 
     this.firestore
