@@ -5,8 +5,5 @@ export class Cliente {
     apellidos: string;
     telefono: number;
     email: string;
-    fechaDesde: Date;
-    fechaHasta: Date;
-    cantidadPersonas: number;
   }
   

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { Cliente } from 'src/app/Models/cliente';
-import { ClienteService } from 'src/app/Services/cliente.service';
+import { Estado } from 'src/app/Models/estado';
+import { SolicitudReserva } from 'src/app/Models/solicitudReserva';
+import { EstadoService } from 'src/app/Services/estado.service';
+import { SolicitudReservaService } from 'src/app/Services/solicitud-reserva.service';
 
 @Component({
   selector: 'app-formulario',
@@ -12,11 +16,14 @@ import { ClienteService } from 'src/app/Services/cliente.service';
 export class FormularioComponent implements OnInit {
 
   datosPersonalesForm: FormGroup;
+  estados: Estado[];
+  estadosSubscription: Subscription;
+
 
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<FormularioComponent>,
-    private _clienteService: ClienteService
-
+    private _solicitudReserva: SolicitudReservaService,
+    private _estado: EstadoService
     ) { }
 
   ngOnInit(): void {
@@ -31,6 +38,15 @@ export class FormularioComponent implements OnInit {
 
     });
 
+    this.estadosSubscription = this._estado.estadosChanged.subscribe(
+      (estados) => {
+        this.estados = estados;
+      }
+    );
+
+    this._estado.buscarEstados();
+
+
   }
 
   cancelarRegistro(): void {
@@ -38,17 +54,21 @@ export class FormularioComponent implements OnInit {
   }
 
   guardarRegistro(): void {
-    let cliente = new Cliente();
+    let solicitudReserva = new SolicitudReserva();
+    solicitudReserva.cliente = new Cliente();
+    solicitudReserva.estado = new Estado();
+
+    solicitudReserva.cliente.nombre = this.datosPersonalesForm.value.nombre;
+    solicitudReserva.cliente.apellidos = this.datosPersonalesForm.value.apellidos;
+    solicitudReserva.cliente.telefono = this.datosPersonalesForm.value.telefono;
+    solicitudReserva.cliente.email = this.datosPersonalesForm.value.email;
+    solicitudReserva.cantidadPersonas = this.datosPersonalesForm.value.cantidadPersonas;
+    solicitudReserva.fechaDesde = this.datosPersonalesForm.value.fechaDesde;
+    solicitudReserva.fechaHasta = this.datosPersonalesForm.value.fechaHasta;
     
-    cliente.nombre = this.datosPersonalesForm.value.nombre;
-    cliente.apellidos = this.datosPersonalesForm.value.apellidos;
-    cliente.telefono = this.datosPersonalesForm.value.telefono;
-    cliente.email = this.datosPersonalesForm.value.email;
-    cliente.cantidadPersonas = this.datosPersonalesForm.value.cantidadPersonas;
-    cliente.fechaDesde = this.datosPersonalesForm.value.fechaDesde;
-    cliente.fechaHasta = this.datosPersonalesForm.value.fechaHasta;
-    
-    this._clienteService.guardarCliente(cliente);
+    solicitudReserva.estado = this.estados.find(e => e.descripcion.toLowerCase() == "pendiente aprobacion");
+
+    this._solicitudReserva.guardarSolicitudReserva(solicitudReserva);
     this.dialogRef.close();
 
   }

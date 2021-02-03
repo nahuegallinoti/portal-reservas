@@ -15,13 +15,17 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MenuComponent } from './Components/menu/menu.component';
+import { BuscarReservaComponent } from './Components/buscar-reserva/buscar-reserva.component';
+import { DetalleReservaComponent } from './Components/detalle-reserva/detalle-reserva.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     FormularioComponent,
-    MenuComponent
+    MenuComponent,
+    BuscarReservaComponent,
+    DetalleReservaComponent,
   ],
   imports: [
     BrowserModule,

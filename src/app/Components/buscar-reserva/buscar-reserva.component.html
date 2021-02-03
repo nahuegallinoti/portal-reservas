@@ -1,0 +1,17 @@
+<form [formGroup]="reservaForm" class="formulario">
+
+    <div class="headerAndClose">
+        <button tabindex="-1" mat-icon-button class="close-button" [mat-dialog-close]="true">
+          <mat-icon class="close-icon">close</mat-icon>
+        </button>
+    </div>
+    
+    <mat-form-field appearance="standard" class="nroReserva">
+        <mat-label>Número de Reserva</mat-label>
+        <input formControlName="codigoReserva" matInput placeholder="Ejemplo: TwdqZQD4b9KwMJScdFNK">
+    </mat-form-field>
+
+    <button *ngIf="!isLoading" mat-raised-button class="btnBuscar" color="primary"
+        (click)="buscarReserva()">Buscar</button>
+    <mat-spinner diameter=40 *ngIf="isLoading" class="top"></mat-spinner>
+</form>

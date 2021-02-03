@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { BuscarReservaComponent } from '../buscar-reserva/buscar-reserva.component';
 import { FormularioComponent } from '../formulario/formulario.component';
 
 @Component({
@@ -30,4 +31,18 @@ export class CarouselComponent implements OnInit {
 
   }
 
+  openDialogBuscarReserva(): void 
+  { 
+    const dialogRef = this.dialog.open(BuscarReservaComponent, {
+      width: "25vw",
+      height: "15vw",
+
+    });
+
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+
+  }
 }
