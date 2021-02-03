@@ -24,7 +24,6 @@ export class DetalleReservaComponent implements OnInit {
     if (this.data?.solicitudReserva != null) {
       this.solicitudReserva = this.data.solicitudReserva;
 
-
     }
 
   }
