@@ -4,6 +4,8 @@ import { Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SolicitudReserva } from '../Models/solicitudReserva';
 import { UIService } from '../Shared/ui.service';
+import firebase from "firebase/app";
+import "firebase/functions";
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +35,10 @@ export class SolicitudReservaService {
       .add(solicitudParse)
       .then(
         (response) =>
-          this.uiService.showSnackBar(
-            'Se registró su solicitud de reserva con código: ' + response.id,
-            null,
-            10000
-          )
+        {
+          this.uiService.showSnackBar('Se registró su solicitud de reserva con código: ' + response.id,null,10000);
+          
+        }
       )
       .catch(
         (error) =>
