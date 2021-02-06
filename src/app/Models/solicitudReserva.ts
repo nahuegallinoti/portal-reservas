@@ -8,6 +8,8 @@ export class SolicitudReserva {
     cantidadPersonas: number;
     cliente: Cliente;
     estado: Estado;
+    codigoReserva: number;
+
   }
 
   

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Cliente } from 'src/app/Models/cliente';
 import { Estado } from 'src/app/Models/estado';
 import { SolicitudReserva } from 'src/app/Models/solicitudReserva';
+import { EmailService } from 'src/app/Services/email.service';
 import { EstadoService } from 'src/app/Services/estado.service';
 import { SolicitudReservaService } from 'src/app/Services/solicitud-reserva.service';
 
@@ -23,7 +24,8 @@ export class FormularioComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<FormularioComponent>,
     private _solicitudReserva: SolicitudReservaService,
-    private _estado: EstadoService
+    private _estado: EstadoService,
+    private _email: EmailService
     ) { }
 
   ngOnInit(): void {
@@ -65,12 +67,13 @@ export class FormularioComponent implements OnInit {
     solicitudReserva.cantidadPersonas = this.datosPersonalesForm.value.cantidadPersonas;
     solicitudReserva.fechaDesde = this.datosPersonalesForm.value.fechaDesde;
     solicitudReserva.fechaHasta = this.datosPersonalesForm.value.fechaHasta;
-    
+    solicitudReserva.codigoReserva = Math.round(Math.random() * (1000 - 12) + 123);
     solicitudReserva.estado = this.estados.find(e => e.descripcion.toLowerCase() == "pendiente de aprobacion");
 
     this._solicitudReserva.guardarSolicitudReserva(solicitudReserva);
+    this._email.enviarEmailRegistroSolicitud(solicitudReserva.codigoReserva);
     this.dialogRef.close();
-
+    
   }
 
 }

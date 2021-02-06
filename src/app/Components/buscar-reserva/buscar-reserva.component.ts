@@ -42,7 +42,7 @@ export class BuscarReservaComponent implements OnInit {
   buscarReserva(): void {
 
     this.isLoading = true;
-    this.reserva = this.solicitudesReserva.find(reservas => reservas.id.toString() === this.reservaForm.value.codigoReserva);
+    this.reserva = this.solicitudesReserva.find(reserva => reserva.codigoReserva.toString() === this.reservaForm.value.codigoReserva);
     this.isLoading = false;
 
     const dialogRef = this.dialog.open(DetalleReservaComponent, {

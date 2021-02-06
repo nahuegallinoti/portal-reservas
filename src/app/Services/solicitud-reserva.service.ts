@@ -36,7 +36,7 @@ export class SolicitudReservaService {
       .then(
         (response) =>
         {
-          this.uiService.showSnackBar('Se registró su solicitud de reserva con código: ' + response.id,null,10000);
+          this.uiService.showSnackBar('Se envió un email a su dirección de correo electrónico con los datos de la solicitud', null, 3000);
           
         }
       )
