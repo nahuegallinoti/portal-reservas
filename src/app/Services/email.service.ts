@@ -17,7 +17,7 @@ export class EmailService {
         html: `<p>Su solicitud de reserva se registró correctamente.</p>
         <p>Puede consultar el estado de su reserva presionando sobre el link</p> 
         <a href="https://portal-reservas.web.app/">Portal de Reservas</a>         
-        <h3>Ingresando el código de reserva: ` + codigoReserva
+        <h3>Ingresando el código de reserva: ` + codigoReserva + `</h3>`
       })
       .then(function (response) {
         console.log(response);

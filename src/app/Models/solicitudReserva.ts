@@ -9,7 +9,7 @@ export class SolicitudReserva {
     cliente: Cliente;
     estado: Estado;
     codigoReserva: number;
-
+    costo: number;
   }
 
   

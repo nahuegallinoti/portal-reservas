@@ -14,7 +14,7 @@ export const environment = {
     appId: "1:538530200137:web:d464cc16c055bc893a9d98",
     measurementId: "G-KRQPFRXH9Q"
   },
-  functionMailSolicitudReserva: "https://us-central1-tesis-a16ed.cloudfunctions.net/appMail/sendMailRegistroReserva"
+  functionMailSolicitudReserva: "https://us-central1-tesis-a16ed.cloudfunctions.net/appMail/sendMailRegistroSolicitud"
 
 };
 
