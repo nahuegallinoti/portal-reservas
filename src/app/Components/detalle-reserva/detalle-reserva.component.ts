@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SolicitudReserva } from 'src/app/Models/solicitudReserva';
+import { Reserva } from 'src/app/Models/reserva.model';
 
 export interface DialogDataSolicitudReserva {
-  solicitudReserva: SolicitudReserva;
+  solicitudReserva: Reserva;
 }
 
 @Component({
@@ -15,7 +15,7 @@ export interface DialogDataSolicitudReserva {
 
 export class DetalleReservaComponent implements OnInit {
 
-  solicitudReserva: SolicitudReserva;
+  solicitudReserva: Reserva;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogDataSolicitudReserva) { }
 

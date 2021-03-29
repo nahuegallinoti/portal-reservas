@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SolicitudReserva } from '../Models/solicitudReserva';
 import { UIService } from '../Shared/ui.service';
-import firebase from "firebase/app";
+import { Reserva } from '../Models/reserva.model';
 import "firebase/functions";
 
 @Injectable({
@@ -12,21 +11,19 @@ import "firebase/functions";
 })
 export class SolicitudReservaService {
 
-  private solicitudesReserva: SolicitudReserva[] = [];
+  private solicitudesReserva: Reserva[] = [];
   private firestoreSubscription: Subscription;
-  solicitudReservaChanged = new Subject<SolicitudReserva[]>();
+  solicitudReservaChanged = new Subject<Reserva[]>();
 
   
   constructor(private firestore: AngularFirestore,
     private uiService: UIService
   ) { }
 
-  guardarSolicitudReserva(solicitud: SolicitudReserva) {
+  guardarSolicitudReserva(solicitud: Reserva) {
 
-    solicitud.cliente = Object.assign(
-      {},
-      solicitud.cliente
-    );
+    solicitud.cliente = Object.assign({}, solicitud.cliente);
+    solicitud.cabana = Object.assign({}, solicitud.cabana);
 
     const solicitudParse = Object.assign({}, solicitud);
 
@@ -51,6 +48,10 @@ export class SolicitudReservaService {
 
   }
 
+  convertDate(date: any) {  
+    return new Date(date.seconds * 1000 + date.nanoseconds/1000000)
+  }
+
   obtenerReservas() {
     this.uiService.loadingStateChanged.next(true);
     this.firestoreSubscription = this.firestore
@@ -63,9 +64,9 @@ export class SolicitudReservaService {
             const id = doc.payload.doc.id;
             
             reserva.id = id;
-            reserva.fechaDesde = reserva.fechaDesde;
-            reserva.fechaHasta = reserva.fechaHasta;
-            reserva.cantidadPersonas = reserva.cantidadPersonas;
+            reserva.fechaDesde = this.convertDate(reserva.fechaDesde);
+            reserva.fechaHasta = this.convertDate(reserva.fechaHasta);
+            reserva.cantOcupantes = reserva.cantOcupantes;
             reserva.cliente = reserva.cliente;
             reserva.estado = reserva.estado;
 
@@ -74,7 +75,7 @@ export class SolicitudReservaService {
         })
       )
       .subscribe(
-        (reservas: SolicitudReserva[]) => {
+        (reservas: Reserva[]) => {
           this.solicitudesReserva = reservas;
           this.solicitudReservaChanged.next([...this.solicitudesReserva]);
           this.uiService.loadingStateChanged.next(false);

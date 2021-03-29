@@ -9,11 +9,11 @@ export class EmailService {
 
   constructor() { }
 
-  enviarEmailRegistroSolicitud(codigoReserva) {
+  enviarEmailRegistroSolicitud(codigoReserva, destinatario) {
 
     axios.post(environment.functionMailSolicitudReserva,
       {
-        destinatario: "nahuegallinoti@gmail.com",
+        destinatario: destinatario,
         html: `<p>Su solicitud de reserva se registró correctamente.</p>
         <p>Puede consultar el estado de su reserva presionando sobre el link</p> 
         <a href="https://portal-reservas.web.app/">Portal de Reservas</a>         

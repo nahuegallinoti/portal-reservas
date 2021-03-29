@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { SolicitudReserva } from 'src/app/Models/solicitudReserva';
+import { Reserva } from 'src/app/Models/reserva.model';
 import { SolicitudReservaService } from 'src/app/Services/solicitud-reserva.service';
 import { UIService } from 'src/app/Shared/ui.service';
 import { DetalleReservaComponent } from '../detalle-reserva/detalle-reserva.component';
@@ -19,9 +19,9 @@ export class BuscarReservaComponent implements OnInit {
   });
 
   isLoading: boolean = false;
-  solicitudesReserva: SolicitudReserva[] = [];
+  solicitudesReserva: Reserva[] = [];
   solicitudesReservaSubscription: Subscription;
-  reserva: SolicitudReserva;
+  reserva: Reserva;
 
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<BuscarReservaComponent>,

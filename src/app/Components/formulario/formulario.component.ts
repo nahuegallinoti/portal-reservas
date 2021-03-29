@@ -4,13 +4,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Cliente } from 'src/app/Models/cliente';
 import { Estado } from 'src/app/Models/estado';
-import { SolicitudReserva } from 'src/app/Models/solicitudReserva';
 import { EmailService } from 'src/app/Services/email.service';
 import { EstadoService } from 'src/app/Services/estado.service';
 import { SolicitudReservaService } from 'src/app/Services/solicitud-reserva.service';
 import * as moment from 'moment';
 import { CabanaService } from 'src/app/Services/cabana.service';
 import { Cabana } from 'src/app/Models/cabana.model';
+import { Reserva } from 'src/app/Models/reserva.model';
 
 @Component({
   selector: 'app-formulario',
@@ -99,7 +99,7 @@ export class FormularioComponent implements OnInit {
   }
 
   guardarRegistro(): void {
-    let solicitudReserva = new SolicitudReserva();
+    let solicitudReserva = new Reserva();
     solicitudReserva.cliente = new Cliente();
     solicitudReserva.estado = new Estado();
 
@@ -108,15 +108,22 @@ export class FormularioComponent implements OnInit {
     solicitudReserva.cliente.telefono = this.datosPersonalesForm.value.telefono;
     solicitudReserva.cliente.email = this.datosPersonalesForm.value.email;
     solicitudReserva.cliente.dni = this.datosPersonalesForm.value.nroDocumento;
-    solicitudReserva.cantidadPersonas = this.datosPersonalesForm.value.cantidadPersonas;
-    solicitudReserva.fechaDesde = this.datosPersonalesForm.value.fechaDesde;
-    solicitudReserva.fechaHasta = this.datosPersonalesForm.value.fechaHasta;
+    solicitudReserva.cantOcupantes = this.datosPersonalesForm.value.cantidadPersonas;
+    solicitudReserva.fechaDesde = new Date(this.datosPersonalesForm.value.fechaDesde);
+    solicitudReserva.fechaDesde.setDate(solicitudReserva.fechaDesde.getDate() + 1);
+    solicitudReserva.fechaHasta = new Date(this.datosPersonalesForm.value.fechaHasta);
+    solicitudReserva.fechaHasta.setDate(solicitudReserva.fechaHasta.getDate() + 1);
     solicitudReserva.codigoReserva = Math.round(Math.random() * (1000 - 12) + 123);
     solicitudReserva.estado = this.estados.find(e => e.descripcion.toLowerCase() == "pendiente de aprobacion");
-    solicitudReserva.costo = this.datosPersonalesForm.value.total;
-    
+    solicitudReserva.montoTotal = this.datosPersonalesForm.value.total;
+    solicitudReserva.disabled = true;
+    solicitudReserva.fechaCreacion = new Date();
+    solicitudReserva.montoSenia = 0;
+    solicitudReserva.realizoCheckIn = false;
+    solicitudReserva.realizoCheckOut = false;
+
     this._solicitudReserva.guardarSolicitudReserva(solicitudReserva);
-    this._email.enviarEmailRegistroSolicitud(solicitudReserva.codigoReserva);
+    this._email.enviarEmailRegistroSolicitud(solicitudReserva.codigoReserva, solicitudReserva.cliente.email);
     this.dialogRef.close();
 
   }
