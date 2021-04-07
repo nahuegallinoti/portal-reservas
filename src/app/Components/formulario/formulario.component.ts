@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { CabanaService } from 'src/app/Services/cabana.service';
 import { Cabana } from 'src/app/Models/cabana.model';
 import { Reserva } from 'src/app/Models/reserva.model';
+import { TarifaService } from 'src/app/Services/tarifa.service';
 
 @Component({
   selector: 'app-formulario',
@@ -22,8 +23,11 @@ export class FormularioComponent implements OnInit {
   datosPersonalesForm: FormGroup;
   estados: Estado[];
   estadosSubscription: Subscription;
-  cabanasSubscription: Subscription;
   cabanas: Cabana[] = [];
+  cabanasSubscription: Subscription;
+  tarifas = [];
+  tarifasSubscription: Subscription;
+
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -32,6 +36,8 @@ export class FormularioComponent implements OnInit {
     private _estado: EstadoService,
     private _email: EmailService,
     private _cabana: CabanaService,
+    private _tarifa: TarifaService,
+
 
   ) { }
 
@@ -61,8 +67,15 @@ export class FormularioComponent implements OnInit {
       }
     );
 
+    this.tarifasSubscription = this._tarifa.tarifasChanged.subscribe(
+      (tarifas) => {
+        this.tarifas = tarifas;
+      }
+    );
+
     this._cabana.obtenerCabanias();
     this._estado.buscarEstados();
+    this._tarifa.buscarTarifas();
 
 
   }
@@ -87,8 +100,12 @@ export class FormularioComponent implements OnInit {
 
     let cabanaSelected = cabanasFilt[0];
 
-    //TODO aqui se deberia sumar la tarifa fija segun epoca del año en ves de 1500
-    const total = 1500 * cantOcupantes * cantDias + cabanaSelected.precioDia;
+    const tarifa = this.tarifas.find(x => moment(fechaDesde).isBetween(x.fechaDesde, x.fechaHasta, null, "[]"));
+
+    let precioDiaTarifa = 2300;
+    precioDiaTarifa = tarifa ? tarifa.precioDia : precioDiaTarifa;
+
+    const total = precioDiaTarifa * cantOcupantes * cantDias + cabanaSelected.precioDia;
 
     this.datosPersonalesForm.controls.total.setValue(total);
 
