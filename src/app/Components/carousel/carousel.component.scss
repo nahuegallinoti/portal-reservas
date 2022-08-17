@@ -25,22 +25,22 @@ ngb-carousel {
     z-index: -1;
 }
 
-.carousel-item.active{
+.carousel-item.active {
     opacity: 1;
     visibility: visible;
     z-index: 10;
 }
 
 .carousel-control-prev {
-     z-index: 20;
+    z-index: 20;
 }
 
 
 .carousel-control-next {
-     z-index: 20;
+    z-index: 20;
 }
 
-.carousel-indicators{
+.carousel-indicators {
     z-index: 20;
 }
 
@@ -72,16 +72,11 @@ ngb-carousel {
 
 
 .btn-formulario-nuevo:hover {
-    background-color: rgb(236, 250, 114);
+    background-color: #F3AC5D;
     transform: scale(1.2);
 }
 
 .btn-formulario-existente:hover {
-    background-color: rgb(231, 128, 245);
+    background-color: #F3AC5D;
     transform: scale(1.2);
-}
-
-
-.div-boton-formulario {
-    background-color: #cfd68f;
 }

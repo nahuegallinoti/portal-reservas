@@ -1,16 +1,21 @@
-a{
+a {
     text-decoration: none;
     float: right;
 }
 
-a:hover{
+a:hover {
     color: inherit;
 }
 
-.toolbar { 
-    background-color: #bad1b0c4;
+.toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3vh;
+    background-color: white !important;
 }
 
 .title {
-    margin-left: 42rem;
+    font-size: xx-large;
 }
